@@ -34,7 +34,7 @@ The dataset provides 10667 Chinese financial news sentences with a total of 2918
 * To **train** the BiLSTM-CRF baseline model with **CLUENER2020** dataset :
 
 ```shell
-python run_lstm_crf.py \
+python run_BiLSTM-CRF.py \
 		--do_train \
 		--data_dir ./dataset/cluener \
 		--epochs 100 \
@@ -47,7 +47,7 @@ python run_lstm_crf.py \
 * Using the trained model to **predict**
 
 ```shell
-python run_lstm_crf.py \
+python run_BiLSTM-CRF.py \
 		--do_predict \ 
 		--out_dir ./output \ 
 ```
