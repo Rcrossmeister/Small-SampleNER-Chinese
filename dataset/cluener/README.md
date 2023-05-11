@@ -111,4 +111,4 @@ This data is based on the THUCTC, an open-source text classification dataset fro
 |    Movie     |   74.23    |
 | **Overall**  |   71.35    |
 
-More details can be found [here]()
+More details can be found [here](https://github.com/Rcrossmeister/Small-SampleNER-Chinese/blob/main/outputs/bilstm_crf/bilstm_crf-ner.log)
