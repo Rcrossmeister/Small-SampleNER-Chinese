@@ -198,7 +198,7 @@ class BIO_Analyzer(BaseAnalyzer):
         logging.info(f"{'label'.ljust(16)}{'p'.ljust(16)}{'r'.ljust(16)}{'f1'.ljust(16)}{'best_f1'.ljust(16)}"
                      f"{'best_overall_f1'.ljust(16)}")
         for i in label:
-            info = f"{i}"\
+            info = f"{i}".ljust(16)\
                    + f"{p[i]:.2f}".ljust(16)\
                    + f"{r[i]:.2f}".ljust(16)\
                    + f"{f1[i]:.2f}".ljust(16)\
