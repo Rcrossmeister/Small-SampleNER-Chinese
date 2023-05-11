@@ -195,9 +195,16 @@ class BIO_Analyzer(BaseAnalyzer):
         elif f1["OVERALL"] > self.best_overall_f1["OVERALL"]:
             self.best_overall_f1 = f1
 
-        logging.info("label\tp\tr\tf1\tbest_f1\tbest_overall_f1")
+        logging.info(f"{'label'.ljust(16)}{'p'.ljust(16)}{'r'.ljust(16)}{'f1'.ljust(16)}{'best_f1'.ljust(16)}"
+                     f"{'best_overall_f1'.ljust(16)}")
         for i in label:
-            logging.info(f"{i}\t{p[i]:.2f}\t{r[i]:.2f}\t{f1[i]:.2f}\t{self.best_f1[i]:.2f}\t{self.best_overall_f1[i]:.2f}")
+            info = f"{i}"\
+                   + f"{p[i]:.2f}".ljust(16)\
+                   + f"{r[i]:.2f}".ljust(16)\
+                   + f"{f1[i]:.2f}".ljust(16)\
+                   + f"{self.best_f1[i]:.2f}".ljust(16)\
+                   + f"{self.best_overall_f1[i]:.2f}".ljust(16)
+            logging.info(info)
         # assert False
 
 
