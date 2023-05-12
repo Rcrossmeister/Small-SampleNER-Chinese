@@ -7,6 +7,8 @@ _Note : This repo is built for code support of our paper, the more available met
 
 _Note : A Bert-BiLSTM-CRF version is planned to upload later soon_.
 
+_Note : the transfer document for BIO to json is available soon._
+
 _Note : A baseline result of CCKS2017, 2018, 2019, Weibo, etc. is planned to upload later soon._
 
 *Note : An data interface that can modify the below dataset to adapt to this code will be uploaded.*
