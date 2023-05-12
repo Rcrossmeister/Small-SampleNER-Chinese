@@ -4,7 +4,7 @@ import argparse
 import torch.nn as nn
 from torch import optim
 from pathlib import Path
-from model import NERModel, BERT_BiLSTM_CRF
+from model import BiLSTM_CRF, BERT_BiLSTM_CRF
 from dataset_loader import DatasetLoader
 from progressbar import ProgressBar
 from ner_metrics import SeqEntityScore
@@ -250,7 +250,7 @@ def main():
     把有没有bert的模型在这里区分开
     """
     if args.model == "bilstm-crf":
-        model = NERModel(vocab_size=len(processor.vocab), embedding_size=args.embedding_size,
+        model = BiLSTM_CRF(vocab_size=len(processor.vocab), embedding_size=args.embedding_size,
                          hidden_size=args.hidden_size,device=args.device,label2id=args.label2id)
     elif args.model == "bert-bilstm-crf":
         model = BERT_BiLSTM_CRF(len(label2id), "bert-base-chinese")

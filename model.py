@@ -19,10 +19,10 @@ class SpatialDropout(nn.Dropout2d):
         x = x.squeeze(2)  # (N, T, K)
         return x
 
-class NERModel(nn.Module):
+class BiLSTM_CRF(nn.Module):
     def __init__(self,vocab_size,embedding_size,hidden_size,
                  label2id,device,drop_p = 0.1):
-        super(NERModel, self).__init__()
+        super(BiLSTM_CRF, self).__init__()
         self.emebdding_size = embedding_size
         self.embedding = nn.Embedding(vocab_size, embedding_size)
         self.bilstm = nn.LSTM(input_size=embedding_size,hidden_size=hidden_size,
