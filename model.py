@@ -3,7 +3,7 @@ from torch.nn import LayerNorm
 import torch.nn as nn
 from crf import CRF
 from transformers import BertModel
-from typing import Optional
+from typing import Optional, Tuple, List
 import logging
 from torchcrf import CRF as torchCRF
 
@@ -50,23 +50,19 @@ class NERModel(nn.Module):
             return features
 
 class BERT_BiLSTM_CRF(nn.Module):
-    """
-    a BERT_BiLSTM_CRF model
-    """
-
     def __init__(self, num_classes: int, bert_model_name: str,
                  hidden_dim: Optional[int] = 256, num_layers: Optional[int] = 2):
         """
-        construction of the class
+        构造函数
 
         Args:
-            num_classes (int): Number of the tags
+            num_classes (int): tag的数量
 
-            bert_model_name (str): Pretrained model name
+            bert_model_name (str): BERT模型的名字
 
-            hidden_dim (Optional[int]): LSTM hidden dimensions
+            hidden_dim (Optional[int]): LSTM隐藏单元数量
 
-            num_layers (Optional[int]): Number of LSTM layers
+            num_layers (Optional[int]): LSTM隐藏层层数
         """
         super().__init__()
         # self.device = device
@@ -135,4 +131,31 @@ class BERT_BiLSTM_CRF(nn.Module):
         loss_item = self.loss(x, y_pred, y)
         return loss_item
     
+    def forward_loss(self, input_ids: torch.Tensor, attention_mask: torch.Tensor,
+                     y_true: torch.Tensor) -> Tuple[List[List[int]], torch.Tensor]:
+        """
+        计算forward和loss
+
+        Args:
+            input_ids (:class:`torch.Tensor`): 句子token化后的数据，形状应该是[batch_size, seq_length]
+
+            attention_mask (:class:`torch.Tensor`): 表示每个句子应该关注的部分，句子部分为1，填充部分为0
+
+            y_true (:class:`torch.Tensor`): 正确的数据
+        
+        Returns:
+            :class:`List[List[int]]`: CRF解码后的部分
+
+            :class:`torch.Tensor`: loss
+        """
+        y_pred = self.forward({
+            "input_ids": input_ids,
+            "attention_mask": attention_mask
+        })
+        mask = attention_mask.bool()
+        y_pred = self.crf.decode(y_pred, mask=mask)
+        loss = -self.crf(y_pred, y_true, mask=mask)
+        return y_pred, loss
+
+
 
