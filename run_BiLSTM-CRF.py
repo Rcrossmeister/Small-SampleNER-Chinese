@@ -210,6 +210,7 @@ def main():
     parser.add_argument("--arch",default='bilstm_crf',type=str)
     parser.add_argument("--learning_rate",default=0.001,type=float)
     parser.add_argument("--seed",default=1234,type=int)
+    parser.add_argument("--random_seed", default=False, type=int)
     parser.add_argument("--gpu",default='2',type=str)
     parser.add_argument("--epochs",default=100,type=int)
     parser.add_argument("--batch_size",default=64,type=int)
@@ -229,7 +230,11 @@ def main():
     if not args.output_dir.exists():
         args.output_dir.mkdir()
     init_logger(log_file=str(args.output_dir / '{}-{}.log'.format(args.arch, args.task_name)))
+
     seed_everything(args.seed)
+    if not args.random_seed:
+        torch.backends.cudnn.deterministic = True
+
     if args.gpu!='':
         args.device = torch.device(f"cuda:{args.gpu}")
     else:
