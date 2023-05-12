@@ -49,17 +49,33 @@ class NERModel(nn.Module):
         else:
             return features
 
-class BERT_BiLSTM_CRF:
-    def __init__(self, num_classes: int, bert_model_name: str, device: str,
+class BERT_BiLSTM_CRF(nn.Module):
+    """
+    a BERT_BiLSTM_CRF model
+    """
+
+    def __init__(self, num_classes: int, bert_model_name: str,
                  hidden_dim: Optional[int] = 256, num_layers: Optional[int] = 2):
+        """
+        construction of the class
+
+        Args:
+            num_classes (int): Number of the tags
+
+            bert_model_name (str): Pretrained model name
+
+            hidden_dim (Optional[int]): LSTM hidden dimensions
+
+            num_layers (Optional[int]): Number of LSTM layers
+        """
         super().__init__()
-        self.device = device
-        self.bert = BertModel.from_pretrained(bert_model_name).to(device)
+        # self.device = device
+        self.bert = BertModel.from_pretrained(bert_model_name)
         self.lstm = nn.LSTM(input_size=self.bert.config.hidden_size, hidden_size=hidden_dim, num_layers=num_layers,
-                            batch_first=True, bidirectional=True).to(device)
+                            batch_first=True, bidirectional=True)
         self.dropout = nn.Dropout(p=0.1)
-        self.hidden2label = nn.Linear(hidden_dim * 2, num_classes).to(device)
-        self.crf = torchCRF(num_classes, batch_first=True).to(device)
+        self.hidden2label = nn.Linear(hidden_dim * 2, num_classes)
+        self.crf = torchCRF(num_classes, batch_first=True)
 
     def forward(self, x):
         outputs = self.bert(**x)
@@ -106,10 +122,10 @@ class BERT_BiLSTM_CRF:
         else:
             raise ValueError(f"Invalid mode {mode}")
 
-    def to(self, x, y):
-        x["input_ids"] = x["input_ids"].to(self.device)
-        x["attention_mask"] = x["attention_mask"].to(self.device)
-        return x, y.to(self.device)
+    # def to(self, x, y):
+    #     x["input_ids"] = x["input_ids"].to(self.device)
+    #     x["attention_mask"] = x["attention_mask"].to(self.device)
+    #     return x, y.to(self.device)
 
     def save_model(self, path):
         torch.save(self.state_dict(), path)
@@ -118,3 +134,5 @@ class BERT_BiLSTM_CRF:
         y_pred = self.forward(x)
         loss_item = self.loss(x, y_pred, y)
         return loss_item
+    
+
