@@ -245,17 +245,17 @@ def main():
     processor = CluenerProcessor(data_dir=args.data_dir)
     processor.get_vocab()
 
+    model = None
     """
     把有没有bert的模型在这里区分开
     """
-    if args.model == '':
-        pass
-    else:
-        pass
-
+    if args.model == "bilstm-crf":
+        model = NERModel(vocab_size=len(processor.vocab), embedding_size=args.embedding_size,
+                         hidden_size=args.hidden_size,device=args.device,label2id=args.label2id)
+    elif args.model == "bert-bilstm-crf":
+        model = BERT_BiLSTM_CRF(len(label2id), "bert-base-chinese")
     # 需要采用不同的初始化形式
-    model = NERModel(vocab_size=len(processor.vocab), embedding_size=args.embedding_size,
-                     hidden_size=args.hidden_size,device=args.device,label2id=args.label2id)
+    
     model.to(args.device)
     if args.do_train:
         train(args,model,processor)
