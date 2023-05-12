@@ -144,9 +144,7 @@ class BERT_BiLSTM_CRF(nn.Module):
             y_true (:class:`torch.Tensor`): 正确的数据
         
         Returns:
-            :class:`List[List[int]]`: CRF解码后的部分
-
-            :class:`torch.Tensor`: loss
+            (y_pred, loss)，其中y_pred是CRF解码后的数据，loss是经过CRF计算后的损失值
         """
         y_pred = self.forward({
             "input_ids": input_ids,
