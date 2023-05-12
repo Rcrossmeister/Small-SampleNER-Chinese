@@ -1,13 +1,13 @@
 # Small-SampleNER-Chinese
-A BiLSTM-CRF model is used to complete chinese NER tasks. It is a improvement of baseline model from [CLUENER2020](https://github.com/CLUEbenchmark/CLUENER2020/tree/master/bilstm_crf_pytorch), we use it to adapt our task in the future.
+A BiLSTM-CRF model is used to complete Chinese NER tasks. It is an improvement of the baseline model from [CLUENER2020](https://github.com/CLUEbenchmark/CLUENER2020/tree/master/bilstm_crf_pytorch), we use it to adapt our task in the future.
 
 **NOTIFICATION:**
 
-_Note : This repo is built for a code support of our paper, more available method is developing in process._
+_Note : This repo is built for code support of our paper, the more available methods is developing in process._
 
-_Note : A Bert-BiLSTM-CRF version is planned to upload for later soon_.
+_Note : A Bert-BiLSTM-CRF version is planned to upload later soon_.
 
-_Note : A baseline result of CCKS2017, 2018, 2019, Weibo etc. is planned to upload for later soon._
+_Note : A baseline result of CCKS2017, 2018, 2019, Weibo, etc. is planned to upload later soon._
 
 *Note : An data interface that can modify the below dataset to adapt to this code will be uploaded.*
 
