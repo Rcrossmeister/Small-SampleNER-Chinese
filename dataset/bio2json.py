@@ -1,0 +1,60 @@
+import json
+
+def bio2json(bio_data):
+    text = ''
+    entities = {}
+    entity_type = ''
+    start = -1
+    end = -1
+
+    for i in range(len(bio_data)):
+        word, label = bio_data[i].split()
+        if label.startswith('B-'):
+            if start != -1:
+                if entity_type not in entities:
+                    entities[entity_type] = {}
+                if text[start:end] not in entities[entity_type]:
+                    entities[entity_type][text[start:end]] = []
+                entities[entity_type][text[start:end]].append([start, end])
+            entity_type = label[2:]
+            start = i
+            end = i + 1
+        elif label.startswith('I-'):
+            if entity_type != label[2:]:
+                if entity_type not in entities:
+                    entities[entity_type] = {}
+                if text[start:end] not in entities[entity_type]:
+                    entities[entity_type][text[start:end]] = []
+                entities[entity_type][text[start:end]].append([start, end])
+                entity_type = label[2:]
+                start = i
+            else:
+                end = i + 1
+        else:
+            if start != -1:
+                if entity_type not in entities:
+                    entities[entity_type] = {}
+                if text[start:end] not in entities[entity_type]:
+                    entities[entity_type][text[start:end]] = []
+                entities[entity_type][text[start:end]].append([start, end])
+                start = -1
+                end = -1
+                entity_type = ''
+
+        text += word
+
+    if start != -1:
+        if entity_type not in entities:
+            entities[entity_type] = {}
+        if text[start:end] not in entities[entity_type]:
+            entities[entity_type][text[start:end]] = []
+        entities[entity_type][text[start:end]].append([start, end])
+
+    labels = {}
+    for entity_type in entities:
+        for entity in entities[entity_type]:
+            if entity_type not in labels:
+                labels[entity_type] = {}
+            labels[entity_type][entity] = entities[entity_type][entity]
+
+    return json.dumps({"text": text, "label": labels}, ensure_ascii=False)
