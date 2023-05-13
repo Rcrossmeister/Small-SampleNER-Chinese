@@ -7,13 +7,15 @@ _Note : This repo is built for code support of our paper, the more available met
 
 _Note : A Bert-BiLSTM-CRF version is planned to upload later soon_.
 
-_Note : the transfer document for BIO to json is available soon._
-
 _Note : A baseline result of CCKS2017, 2018, 2019, Weibo, etc. is planned to upload later soon._
 
 *Note : An data interface that can modify the below dataset to adapt to this code will be uploaded.*
 
-## DataSet
+__Update:__
+
+* _The transfer document for BIO to json is available now. 05-13-2023_
+
+## DtaSet
 
 1. __[CLUENER2020](https://github.com/Rcrossmeister/Small-SampleNER-Chinese/tree/main/dataset/cluener)__
 
@@ -56,10 +58,10 @@ More parameters can be found [here](https://github.com/Rcrossmeister/Small-Sampl
 
 The following baseline result is evaluated by F1-score
 
-|  Model\Dataset  | CLUENER2020 | MSRA  | CFSC-NER |
-| :-------------: | :---------: | :---: | :------: |
-|   BiLSTM-CRF    |    71.35    | 86.49 |          |
-| Bert-BiLSTM-CRF |             |       |          |
+|  Model\Dataset  | CLUENER2020 | MSRA  | CFSC-NER | CCKS2017 | CCKS2018 |
+| :-------------: | :---------: | :---: | :------: | :------: | :------: |
+|   BiLSTM-CRF    |    71.35    | 86.49 |          |          |          |
+| Bert-BiLSTM-CRF |             |       |          |          |          |
 
 ## Citation
 
