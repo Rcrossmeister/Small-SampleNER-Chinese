@@ -65,6 +65,7 @@ def read_bio_save_json(src_path):
     temp_buffer = []
     label2id = {}
     label2id_buffer =set()
+    
     with open(src_path,'r',encoding='utf-8') as f:
         for item in f.readlines():
             item = item.strip()
