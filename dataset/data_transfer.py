@@ -79,3 +79,4 @@ def read_bio_save_json(src_path):
     with open(des_path,'w',encoding='utf-8') as f:
         for item in json_buffer:
             f.write(item+'\n')
+    return des_path
