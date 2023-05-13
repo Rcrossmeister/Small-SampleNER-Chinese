@@ -63,15 +63,23 @@ def bio2json(bio_data):
 def read_bio_save_json(src_path):
     json_buffer = []
     temp_buffer = []
-
+    label2id = {}
+    label2id_buffer =set()
     with open(src_path,'r',encoding='utf-8') as f:
         for item in f.readlines():
             item = item.strip()
             if item!="":
                 temp_buffer.append(item)
+                label2id_buffer.add(item.split()[1])
             else:
                 json_buffer.append(bio2json(temp_buffer))
                 temp_buffer=[]
+
+    label2id_buffer = list(label2id_buffer)
+    label2id_buffer.sort()
+    label2id_buffer.remove('O')
+    label2id_buffer.insert(0,'O')
+    label2id = {idx:item for idx,item in enumerate(label2id_buffer)}
 
     dot_idx = len(src_path)-src_path[::-1].index('.')-1
     des_path = src_path[:dot_idx]+'.json'
@@ -79,4 +87,6 @@ def read_bio_save_json(src_path):
     with open(des_path,'w',encoding='utf-8') as f:
         for item in json_buffer:
             f.write(item+'\n')
+    with open('label2id.json','w',encoding='utf-8') as f:
+        f.write(str(label2id))
     return des_path
