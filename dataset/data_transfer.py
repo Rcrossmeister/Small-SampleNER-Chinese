@@ -57,4 +57,25 @@ def bio2json(bio_data):
                 labels[entity_type] = {}
             labels[entity_type][entity] = entities[entity_type][entity]
 
+
     return json.dumps({"text": text, "label": labels}, ensure_ascii=False)
+
+def read_bio_save_json(src_path):
+    json_buffer = []
+    temp_buffer = []
+
+    with open(src_path,'r',encoding='utf-8') as f:
+        for item in f.readlines():
+            item = item.strip()
+            if item!="":
+                temp_buffer.append(item)
+            else:
+                json_buffer.append(bio2json(temp_buffer))
+                temp_buffer=[]
+
+    dot_idx = len(src_path)-src_path[::-1].index('.')-1
+    des_path = src_path[:dot_idx]+'.json'
+    
+    with open(des_path,'w',encoding='utf-8') as f:
+        for item in json_buffer:
+            f.write(item+'\n')
