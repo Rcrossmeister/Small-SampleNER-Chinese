@@ -87,6 +87,9 @@ def read_bio_save_json(src_path):
     with open(des_path,'w',encoding='utf-8') as f:
         for item in json_buffer:
             f.write(item+'\n')
+    
+    label2id_path = des_path.rsplit('/',1)[0]+'/label2id.json'
     with open(des_path.rsplit('/',1)[0]+'/label2id.json','w',encoding='utf-8') as f:
         f.write(str(label2id))
-    return des_path
+        
+    return des_path,label2id_path
