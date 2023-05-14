@@ -200,7 +200,7 @@ def main():
     parser.add_argument("--data_dir", default='./dataset/cluener', action='store_true')
     parser.add_argument("--output_dir", default='./output', action='store_true')
 
-    parser.add_argument("--model", default='bilstm_crf', action='store_true')
+    parser.add_argument("--model", default='bilstm_crf')
 
     parser.add_argument("--do_train", default=False, action='store_true')
     parser.add_argument("--do_eval", default=False, action='store_true')
@@ -254,11 +254,12 @@ def main():
     """
     把有没有bert的模型在这里区分开
     """
-    if args.model == "bilstm-crf":
+    if args.model == "bilstm_crf":
         model = BiLSTM_CRF(vocab_size=len(processor.vocab), embedding_size=args.embedding_size,
                          hidden_size=args.hidden_size,device=args.device,label2id=args.label2id)
-    elif args.model == "bert-bilstm-crf":
-        model = BERT_BiLSTM_CRF(len(label2id), "bert-base-chinese")
+    elif args.model == "bert_bilstm_crf":
+        model = BERT_BiLSTM_CRF(vocab_size=len(processor.vocab), bert_model_name="bert-base-chinese",
+                                hidden_size=args.hidden_size,device=args.device,label2id=args.label2id)
     # 需要采用不同的初始化形式
     
     model.to(args.device)
