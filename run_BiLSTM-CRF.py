@@ -181,17 +181,17 @@ def load_and_cache_examples(args,processor, data_type='train'):
         data_type,
         args.arch,
         str(args.task_name))
-    if cached_examples_file.exists():
-        logger.info("Loading features from cached file %s", cached_examples_file)
-        examples = torch.load(cached_examples_file)
-    else:
-        logger.info("Creating features from dataset file at %s", args.data_dir)
-        if data_type == 'train':
-            examples = processor.get_train_examples()
-        elif data_type == 'dev':
-            examples = processor.get_dev_examples()
-        logger.info("Saving features into cached file %s", cached_examples_file)
-        torch.save(examples, str(cached_examples_file))
+    #if cached_examples_file.exists():
+    #    logger.info("Loading features from cached file %s", cached_examples_file)
+    #    examples = torch.load(cached_examples_file)
+    #else:
+    logger.info("Creating features from dataset file at %s", args.data_dir)
+    if data_type == 'train':
+        examples = processor.get_train_examples()
+    elif data_type == 'dev':
+        examples = processor.get_dev_examples()
+    #logger.info("Saving features into cached file %s", cached_examples_file)
+    #torch.save(examples, str(cached_examples_file))
     return examples
 
 def main():
@@ -247,7 +247,7 @@ def main():
 
     args.id2label = {i: label for i, label in enumerate(label2id)}
     args.label2id = label2id
-    processor = CluenerProcessor(data_dir=args.data_dir)
+    processor = CluenerProcessor(args,data_dir=args.data_dir)
     processor.get_vocab()
 
     model = None
