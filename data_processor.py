@@ -3,8 +3,9 @@ from vocabulary import Vocabulary
 
 class CluenerProcessor:
     """Processor for the chinese ner data set."""
-    def __init__(self,data_dir):
+    def __init__(self,args,data_dir):
         self.vocab = Vocabulary()
+        self.args = args
         self.data_dir = data_dir
 
     def get_vocab(self):
