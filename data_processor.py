@@ -50,9 +50,13 @@ class CluenerProcessor:
                         for sub_name, sub_index in value.items():
                             for start_index, end_index in sub_index:
                                 assert ''.join(words[start_index:end_index + 1]) == sub_name
-                                if start_index == end_index:
-                                    labels[start_index] = 'S-' + key
-                                else:
+                                if self.args.markup =='bios':
+                                    if start_index == end_index:
+                                        labels[start_index] = 'S-' + key
+                                    else:
+                                        labels[start_index] = 'B-' + key
+                                        labels[start_index + 1:end_index + 1] = ['I-' + key] * (len(sub_name) - 1)
+                                elif self.args.markup =='bio':
                                     labels[start_index] = 'B-' + key
                                     labels[start_index + 1:end_index + 1] = ['I-' + key] * (len(sub_name) - 1)
                 json_d['id'] = f"{mode}_{idx}"
