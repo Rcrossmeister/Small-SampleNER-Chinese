@@ -60,9 +60,6 @@ def bio2json(bio_data):
             if entity_type not in labels:
                 labels[entity_type] = {}
             labels[entity_type][entity] = entities[entity_type][entity]
-    # if text == "哈工智能、英飞拓继续涨停，江苏雷利、软控股份、赛象科技、双环传动、中大力德等继续冲高。":
-    #     print(bio_data,labels)
-    #     raise BaseException("SB")
     
     return json.dumps({"text": text, "label": labels}, ensure_ascii=False)
 
