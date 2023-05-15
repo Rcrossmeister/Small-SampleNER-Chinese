@@ -13,9 +13,10 @@ def bio2json(bio_data):
             if start != -1:
                 if entity_type not in entities:
                     entities[entity_type] = {}
-                if text[start:end] not in entities[entity_type]:
-                    entities[entity_type][text[start:end]] = []
-                entities[entity_type][text[start:end]].append([start, end])
+                if text[start:end]:
+                    if text[start:end] not in entities[entity_type]:
+                        entities[entity_type][text[start:end]] = []
+                    entities[entity_type][text[start:end]].append([start, end-1])
             entity_type = label[2:]
             start = i
             end = i + 1
@@ -23,9 +24,10 @@ def bio2json(bio_data):
             if entity_type != label[2:]:
                 if entity_type not in entities:
                     entities[entity_type] = {}
-                if text[start:end] not in entities[entity_type]:
-                    entities[entity_type][text[start:end]] = []
-                entities[entity_type][text[start:end]].append([start, end])
+                if text[start:end]:
+                    if text[start:end] not in entities[entity_type]:
+                        entities[entity_type][text[start:end]] = []
+                    entities[entity_type][text[start:end]].append([start, end-1])
                 entity_type = label[2:]
                 start = i
             else:
@@ -34,21 +36,23 @@ def bio2json(bio_data):
             if start != -1:
                 if entity_type not in entities:
                     entities[entity_type] = {}
-                if text[start:end] not in entities[entity_type]:
-                    entities[entity_type][text[start:end]] = []
-                entities[entity_type][text[start:end]].append([start, end])
+                if text[start:end]:
+                    if text[start:end] not in entities[entity_type]:
+                        entities[entity_type][text[start:end]] = []
+                    entities[entity_type][text[start:end]].append([start, end-1])
                 start = -1
                 end = -1
                 entity_type = ''
 
         text += word
-
+        
     if start != -1:
         if entity_type not in entities:
             entities[entity_type] = {}
-        if text[start:end] not in entities[entity_type]:
-            entities[entity_type][text[start:end]] = []
-        entities[entity_type][text[start:end]].append([start, end])
+        if text[start:end]:
+            if text[start:end] not in entities[entity_type]:
+                entities[entity_type][text[start:end]] = []
+            entities[entity_type][text[start:end]].append([start, end-1])
 
     labels = {}
     for entity_type in entities:
@@ -56,8 +60,10 @@ def bio2json(bio_data):
             if entity_type not in labels:
                 labels[entity_type] = {}
             labels[entity_type][entity] = entities[entity_type][entity]
-
-
+    # if text == "哈工智能、英飞拓继续涨停，江苏雷利、软控股份、赛象科技、双环传动、中大力德等继续冲高。":
+    #     print(bio_data,labels)
+    #     raise BaseException("SB")
+    
     return json.dumps({"text": text, "label": labels}, ensure_ascii=False)
 
 def read_bio_save_json(src_path):
@@ -80,17 +86,26 @@ def read_bio_save_json(src_path):
     label2id_buffer.sort()
     label2id_buffer.remove('O')
     label2id_buffer.insert(0,'O')
-    label2id = {idx:item for idx,item in enumerate(label2id_buffer)}
+    label2id = {item:idx for idx,item in enumerate(label2id_buffer)}
+    
+    label2id["<START>"] = len(label2id)
+    label2id["<STOP>"] = len(label2id)
 
     dot_idx = len(src_path)-src_path[::-1].index('.')-1
     des_path = src_path[:dot_idx]+'.json'
     
     with open(des_path,'w',encoding='utf-8') as f:
         for item in json_buffer:
-            f.write(item+'\n')
+            f.write(str(item)+"\n")
+            
+            
     
     label2id_path = des_path.rsplit('/',1)[0]+'/label2id.json'
     with open(label2id_path,'w',encoding='utf-8') as f:
         json.dump(label2id, f)
         
     return des_path,label2id_path
+
+if __name__ == "__main__":
+    for item in ['./test.txt','./val.txt','./train.txt']:
+        read_bio_save_json(item)
