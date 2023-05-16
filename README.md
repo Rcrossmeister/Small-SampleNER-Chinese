@@ -63,7 +63,7 @@ The following baseline result is evaluated by F1-score
 
 |  Model\Dataset  | CLUENER2020 | MSRA  | CFSC-NER | CCKS2017 | CCKS2018 |
 | :-------------: | :---------: | :---: | :------: | :------: | :------: |
-|   BiLSTM-CRF    |    71.35    | 86.49 |          |          |          |
+|   BiLSTM-CRF    |    71.35    | 86.49 |    72.4  |          |          |
 | Bert-BiLSTM-CRF |             |       |          |          |          |
 
 ## Citation
