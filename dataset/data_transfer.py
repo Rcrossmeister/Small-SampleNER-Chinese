@@ -1,6 +1,9 @@
 import json
 
 def bio2json(bio_data):
+    """
+    change single bio type's sentence and label to json {"text":"XXX","label(just tag)":{entity:[start:end]}}  |  e.g. {"text": "我会邀请许惠佑先生届时一同来访。", "label": {"PER": {"许惠佑": [[4, 6]]}}}
+    """
     text = ''
     entities = {}
     entity_type = ''
@@ -64,6 +67,9 @@ def bio2json(bio_data):
     return json.dumps({"text": text, "label": labels}, ensure_ascii=False)
 
 def read_bio_save_json(src_path):
+    """
+    read XXX.txt to save XXX.json and label2id.json {"label":id} | e.g. {"O": 0, "B-LOC": 1, "B-ORG": 2, "B-PER": 3, "I-LOC": 4, "I-ORG": 5, "I-PER": 6, "<START>": 7, "<STOP>": 8}
+    """
     json_buffer = []
     temp_buffer = []
     label2id = {}
