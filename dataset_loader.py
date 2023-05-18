@@ -2,7 +2,8 @@ import random
 import torch
 
 class DatasetLoader(object):
-    def __init__(self, data, batch_size, shuffle, vocab,label2id,seed, sort=True):
+    def __init__(self, data, batch_size, shuffle, vocab,label2id,seed, sort=True,sampler="",sampler_list=[]):
+        """ A Sampler is for subsequential select(here just for a flag), according to the [idx1,idx2……] type Sampler_list(this is what you need to set)."""
         self.data = data
         self.shuffle = shuffle
         self.batch_size = batch_size
@@ -10,16 +11,25 @@ class DatasetLoader(object):
         self.sort = sort
         self.vocab = vocab
         self.label2id = label2id
+        self.sampler = sampler
+        if self.sampler:
+            self.sampler_list = sampler_list
         self.reset()
 
     def reset(self):
         self.examples = self.preprocess(self.data)
         if self.sort:
             self.examples = sorted(self.examples, key=lambda x: x[2], reverse=True)
-        if self.shuffle:
+        if self.sampler:
+            indices = self.sampler_list
+            if self.shuffle:
+                random.shuffle(indices)
+            self.examples = [self.examples[i] for i in indices]
+        elif self.shuffle:
             indices = list(range(len(self.examples)))
             random.shuffle(indices)
             self.examples = [self.examples[i] for i in indices]
+        
         self.features = [self.examples[i:i + self.batch_size] for i in range(0, len(self.examples), self.batch_size)]
         print(f"{len(self.features)} batches created")
 
@@ -31,6 +41,8 @@ class DatasetLoader(object):
             tokens = [self.vocab.to_index(w) for w in text_a.split(" ")]
             x_len = len(tokens)
             text_tag = d['tag']
+            # print(text_a)
+            # print(text_tag)
             tag_ids = [self.label2id[tag] for tag in text_tag.split(" ")]
             processed.append((tokens, tag_ids, x_len, text_a, text_tag))
         return processed
