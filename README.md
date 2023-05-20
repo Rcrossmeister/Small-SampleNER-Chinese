@@ -66,11 +66,12 @@ More parameters can be found [here](https://github.com/Rcrossmeister/Small-Sampl
 
 The following baseline result is evaluated by F1-score
 
-|  Model\Dataset  | CLUENER2020 | MSRA  | CFSC-NER | CCKS2017 | CCKS2018 |
-| :-------------: | :---------: | :---: | :------: | :------: | :------: |
-|   BiLSTM-CRF    |    71.35    | 88.29 |   72.4   |          |          |
-|synomous(m=3,r=0.3)|           |       |   71.4   |          |          |
-| Bert-BiLSTM-CRF |             |       |          |          |          |
+|  Model\Dataset    | CLUENER2020 | MSRA  | CFSC-NER | CCKS2017 | CCKS2018 |
+| :-------------:   | :---------: | :---: | :------: | :------: | :------: |
+|   BiLSTM-CRF      |    71.35    | 88.29 |   72.4   |          |          |
+|synomous(m=3,r=0.3)|             |       |   71.4   |          |          |
+|  Bert-BiLSTM-CRF  |             |       |          |          |          |
+|     Bert-CRF      |             |       |          |          |          |
 
 ## Citation
 
