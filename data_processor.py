@@ -1,10 +1,14 @@
 import json
-from vocabulary import Vocabulary
+from vocabulary import Vocabulary, BERTVocabulary
 
 class CluenerProcessor:
     """Processor for the chinese ner data set."""
-    def __init__(self,args,data_dir):
-        self.vocab = Vocabulary()
+    def __init__(self,args,data_dir, bert = False):
+        self.vocab = None
+        if not bert:
+            self.vocab = Vocabulary()
+        elif bert:
+            self.vocab = BERTVocabulary()
         self.args = args
         self.data_dir = data_dir
 

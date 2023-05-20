@@ -21,8 +21,8 @@ from common import (init_logger,
 def train(args,model,processor):
     train_dataset = load_and_cache_examples(args, processor, data_type='train')
     train_loader = DatasetLoader(data=train_dataset, batch_size=args.batch_size,
-                                 shuffle=False, seed=args.seed, sort=True,
-                                 vocab = processor.vocab,label2id = args.label2id)
+                                 shuffle=False, seed=args.seed, sort=False,
+                                 vocab = processor.vocab,label2id = args.label2id, bert=("bert" in args.model))
     parameters = [p for p in model.parameters() if p.requires_grad]
     optimizer = optim.Adam(parameters, lr=args.learning_rate)
     scheduler = ReduceLROnPlateau(optimizer, mode='max', factor=0.5, patience=3,
@@ -75,7 +75,7 @@ def evaluate(args,model,processor):
     eval_dataset = load_and_cache_examples(args,processor, data_type='dev')
     eval_dataloader = DatasetLoader(data=eval_dataset, batch_size=args.batch_size,
                                  shuffle=False, seed=args.seed, sort=False,
-                                 vocab=processor.vocab, label2id=args.label2id)
+                                 vocab=processor.vocab, label2id=args.label2id, bert=("bert" in args.model))
     pbar = ProgressBar(n_total=len(eval_dataloader), desc="Evaluating")
     metric = SeqEntityScore(args.id2label,markup=args.markup)
     eval_loss = AverageMeter()
@@ -247,7 +247,7 @@ def main():
 
     args.id2label = {i: label for i, label in enumerate(label2id)}
     args.label2id = label2id
-    processor = CluenerProcessor(args,data_dir=args.data_dir)
+    processor = CluenerProcessor(args,data_dir=args.data_dir, bert=("bert" in args.model))
     processor.get_vocab()
 
     model = None

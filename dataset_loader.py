@@ -1,8 +1,10 @@
 import random
 import torch
+from transformers import BertTokenizer
+
 
 class DatasetLoader(object):
-    def __init__(self, data, batch_size, shuffle, vocab,label2id,seed, sort=True):
+    def __init__(self, data, batch_size, shuffle, vocab,label2id,seed, sort=True, bert = False):
         self.data = data
         self.shuffle = shuffle
         self.batch_size = batch_size
@@ -10,6 +12,8 @@ class DatasetLoader(object):
         self.sort = sort
         self.vocab = vocab
         self.label2id = label2id
+        self.bert = bert
+        self.tokenizer = BertTokenizer.from_pretrained("bert-base-chinese")
         self.reset()
 
     def reset(self):
@@ -28,10 +32,19 @@ class DatasetLoader(object):
         processed = []
         for d in data:
             text_a = d['context']
-            tokens = [self.vocab.to_index(w) for w in text_a.split(" ")]
+            tokens = None
+            if self.bert:
+                tokens = self.tokenizer.convert_tokens_to_ids(text_a.split(" "))
+                tokens = [self.tokenizer.cls_token_id] + tokens + [self.tokenizer.sep_token_id]
+            else:
+                tokens = [self.vocab.to_index(w) for w in text_a.split(" ")]
             x_len = len(tokens)
             text_tag = d['tag']
             tag_ids = [self.label2id[tag] for tag in text_tag.split(" ")]
+            if self.bert:
+                tag_ids.insert(0, self.label2id["O"])
+                tag_ids.append(self.label2id["O"])
+                assert len(tokens) == len(tag_ids)
             processed.append((tokens, tag_ids, x_len, text_a, text_tag))
         return processed
 

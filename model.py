@@ -60,9 +60,10 @@ class BERT_BiLSTM_CRF(nn.Module):
                               batch_first=True,num_layers=2,dropout=drop_p,
                               bidirectional=True)
         self.dropout = SpatialDropout(drop_p)
-        self.layer_norm = LayerNorm(hidden_size * 2)
+        # self.layer_norm = LayerNorm(hidden_size * 2)
         self.classifier = nn.Linear(hidden_size * 2,len(label2id))
-        self.crf = CRF(tagset_size=len(label2id), tag_dictionary=label2id, device=device)
+        # self.crf = CRF(tagset_size=len(label2id), tag_dictionary=label2id, device=device)
+        self.torchcrf = torchCRF(len(label2id), batch_first=True)
 
     def forward(self, x):
         # embs = self.embedding(inputs_ids)
@@ -71,17 +72,20 @@ class BERT_BiLSTM_CRF(nn.Module):
         outputs = self.bert(**x)
         sequence_output = outputs.last_hidden_state
         seqence_output, _ = self.bilstm(sequence_output)
-        seqence_output= self.layer_norm(seqence_output)
+        # seqence_output= self.layer_norm(seqence_output)
         features = self.classifier(seqence_output)
         return features
 
     def forward_loss(self, input_ids, input_mask, input_lens, input_tags=None):
+        input_ids = input_ids.to(torch.int32)
+        input_mask = input_mask.to(torch.int32)
         features = self.forward({
             "input_ids"     : input_ids,
             "attention_mask": input_mask
         })
         if input_tags is not None:
-            return features, self.crf.calculate_loss(features, tag_list=input_tags, lengths=input_lens)
+            # return features, self.crf.calculate_loss(features, tag_list=input_tags, lengths=input_lens)
+            return features, -self.torchcrf(features, input_tags, mask=input_mask.bool())
         else:
             return features
 
