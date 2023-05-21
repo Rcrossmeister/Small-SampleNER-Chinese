@@ -29,11 +29,11 @@ MSRA-NER dataset is a Chinese named entity recognition dataset that contains **t
 
 CFSC-NER dataset provides 10667 Chinese financial news sentences with a total of 29181 financial entities, with a single sentence as one data point. The training set has 8533 samples, the validation set has 1067 samples, and the test set has 1067 samples (8:1:1). Each data point consists of sentence text, financial entity position, financial entity, and financial entity category. The maximum length of a sentence is x. **There are four financial entity categories** include Corporate, Stock, Market, and Economy. In addition to all data points, we also provide data points that are divided into training sets, validation sets, and test sets as well as BIO annotated data .
 
-4. CCKS2017
+4. [__CCKS2017__](https://github.com/Rcrossmeister/Small-SampleNER-Chinese/tree/main/dataset/ccks2017)
 
 CCKS2017 is a dataset for Chinese clinical named entity recognition (NER), which is a fundamental and critical task for other natural language processing (NLP) tasks. The dataset consists of 1198 records for training and 398 records for testing
 
-4. CCKS2018
+4. [__CCKS2018__](https://github.com/Rcrossmeister/Small-SampleNER-Chinese/tree/main/dataset/ccks2018)
 
 CCKS2018 is a named entity recognition (NER) task focusing on Chinese electronic medical records (EMR). The dataset provided by CCKS2018 medical NER academic competition consists of 600 entries of real-world CEMRs as training dataset
 
