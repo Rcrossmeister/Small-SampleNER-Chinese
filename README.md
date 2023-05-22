@@ -5,15 +5,16 @@ A BiLSTM-CRF model is used to complete Chinese NER tasks. It is an improvement o
 
 _Note : This repo is built for code support of our paper, the more available methods is developing in process._
 
-_Note : A Bert-BiLSTM-CRF version is planned to upload later soon_.
-
 _Note : A baseline result of CCKS2017, 2018, 2019, Weibo, etc. is planned to upload later soon._
 
-*Note : An data interface that can modify the below dataset to adapt to this code will be uploaded.*
+*Note : An data interface for CCKS is still empty, will be available soon* 
+
+*Note : The detail version of dataset description and README will be updated soon* 
 
 __Update:__
 
 * _The transfer document for BIO to json is available now. 05-13-2023_
+* *The raw version of Bert-BiLSTM-CRF is available, will fix it later*
 
 ## DataSet
 
@@ -33,9 +34,13 @@ CFSC-NER dataset provides 10667 Chinese financial news sentences with a total of
 
 CCKS2017 is a dataset for Chinese clinical named entity recognition (NER), which is a fundamental and critical task for other natural language processing (NLP) tasks. The dataset consists of 1198 records for training and 398 records for testing
 
+**--need interface**
+
 4. [__CCKS2018__](https://github.com/Rcrossmeister/Small-SampleNER-Chinese/tree/main/dataset/ccks2018)
 
 CCKS2018 is a named entity recognition (NER) task focusing on Chinese electronic medical records (EMR). The dataset provided by CCKS2018 medical NER academic competition consists of 600 entries of real-world CEMRs as training dataset
+
+**--need interface**
 
 ## Use
 
