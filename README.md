@@ -74,7 +74,7 @@ The following baseline result is evaluated by F1-score
 |     Bert-CRF      |    79.03    |       |          |          |          |
 
 active_learn on BiLSTM-CRF
-
+r:random 	lc:least_confidence 	loss:loss_predict 	DBAL:deep bayeses	k:k_means
 |  Dataset\Ratio    | 0.2(initial)| 0.4   | 0.6      | 0.8      | 1.0      |
 | :-------------:   | :---------: | :---: | :------: | :------: | :------: |
 |   CLUENER2020     |    00.00    | 00.00 |   00.00  |          |          |
