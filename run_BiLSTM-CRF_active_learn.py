@@ -5,6 +5,7 @@ import torch.nn as nn
 import numpy as np
 import math
 import random
+import os
 from torch import optim
 from pathlib import Path
 from model import NERModel,BERTNERModel
@@ -83,10 +84,10 @@ def train(args,model,processor):
                 logger.info(info)
 
 def evaluate(args,model,processor):
-    if not args.do_test:
-        eval_dataset = load_and_cache_examples(args,processor, data_type='dev')
-    else:
+    if args.do_test or args.do_active_test:
         eval_dataset = load_and_cache_examples(args,processor, data_type='test')
+    else:
+        eval_dataset = load_and_cache_examples(args,processor, data_type='dev')
     
     eval_dataloader = DatasetLoader(data=eval_dataset, batch_size=args.batch_size,
                                  shuffle=False, seed=args.seed, sort=False,
@@ -478,6 +479,27 @@ def active_learn(args,model,processor,selected_method,num_initial_ratio =0.2,num
         print(f'labeled_set : {len(labeled_set)}')
         print(f'unlabeled_set : {len(unlabeled_set)}')
 
+def active_test(args,model,processor):
+    model_list=[]
+    for root, ds, fs in os.walk(args.output_dir):
+        for f in fs:
+            fullname = os.path.join(root, f)
+            if fullname.endswith(f'{args.save_model_name}'):
+                # print(fullname)
+                model_list.append(fullname)
+    model_list.sort()
+    for item in model_list:
+        print(item)
+    for model_path in model_list:
+        model = load_model(model, model_path=str(model_path))
+        # model = load_model(model, model_path=str(model_path))
+        eval_log,class_info=evaluate(args,model,processor)
+        logs = dict( **eval_log)
+        show_info = f'\npredict result: - ' + "-".join([f' {key}: {value:.4f} ' for key, value in logs.items()])
+        logger.info(show_info)
+        for key, value in class_info.items():
+            info = f"Subject: {key} - Acc: {value['acc']} - Recall: {value['recall']} - F1: {value['f1']}"
+            logger.info(info)
 
 def main():
     parser = argparse.ArgumentParser()
@@ -506,6 +528,7 @@ def main():
 
 
     parser.add_argument("--do_active_train", default=False, action='store_true')
+    parser.add_argument("--do_active_test", default=False, action='store_true')
     parser.add_argument("--active_method", default="random", type=str)
     parser
 
@@ -551,13 +574,18 @@ def main():
     if args.do_test:
         model_path = args.output_dir / args.save_model_name
         model = load_model(model, model_path=str(model_path))
-        eval_log,_=evaluate(args,model,processor)
+        eval_log,class_info=evaluate(args,model,processor)
         logs = dict( **eval_log)
         show_info = f'\npredict result: - ' + "-".join([f' {key}: {value:.4f} ' for key, value in logs.items()])
         logger.info(show_info)
+        for key, value in class_info.items():
+            info = f"Subject: {key} - Acc: {value['acc']} - Recall: {value['recall']} - F1: {value['f1']}"
+            logger.info(info)
     if args.do_predict:
         eval_log, _ = evaluate(args,model,processor)
     if args.do_active_train:
         active_learn(args,model,processor,selected_method=args.active_method)
+    if args.do_active_test:
+        active_test(args,model,processor)
 if __name__ == "__main__":
     main()
