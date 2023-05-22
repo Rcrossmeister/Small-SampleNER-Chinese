@@ -75,11 +75,11 @@ The following baseline result is evaluated by F1-score
 
 active_learn on BiLSTM-CRF
 
-|  Dataset\Ratio    |     0.2     | 0.4   | 0.6      | 0.8      | 1.0      |
+|  Dataset\Ratio    | 0.2(initial)| 0.4   | 0.6      | 0.8      | 1.0      |
 | :-------------:   | :---------: | :---: | :------: | :------: | :------: |
 |   CLUENER2020     |    00.00    | 00.00 |   00.00  |          |          |
 |       MSRA        |             | 00.00 |          |          |          |
-|     CFSC-NER      |    00.00    |       |          |          |          |
+|     CFSC-NER(r)   |    66.26    | 69.84 |  71.16  |    72.54  |  72.63   |
 |   CFSC-NER(lc)    |    66.21    | 69.27 |  71.21   |   71.39  |  72.71   |
 |     CCKS2017      |    00.00    |       |          |          |          |
 |     CCKS2017      |    00.00    |       |          |          |          |
