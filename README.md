@@ -73,6 +73,15 @@ The following baseline result is evaluated by F1-score
 |  Bert-BiLSTM-CRF  |    78.38    |       |          |          |          |
 |     Bert-CRF      |    79.03    |       |          |          |          |
 
+
+|  Dataset\Ratio    |     0.2     | 0.4   | 0.6      | 0.8      | 1.0      |
+| :-------------:   | :---------: | :---: | :------: | :------: | :------: |
+|   CLUENER2020     |    00.00    | 00.00 |   00.00  |          |          |
+|       MSRA        |             | 00.00 |          |          |          |
+|     CFSC-NER      |    00.00    |       |          |          |          |
+|     CCKS2017      |    00.00    |       |          |          |          |
+|     CCKS2017      |    00.00    |       |          |          |          |
+
 ## Citation
 
 Please cite our paper if you use it in your work:
