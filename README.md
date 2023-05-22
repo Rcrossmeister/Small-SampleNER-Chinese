@@ -73,7 +73,7 @@ The following baseline result is evaluated by F1-score
 |  Bert-BiLSTM-CRF  |    78.38    |       |          |          |          |
 |     Bert-CRF      |    79.03    |       |          |          |          |
 
-active_learn on BiLSTM-CRF
+active_learn (each_query raito = 0.2) on BiLSTM-CRF
 
 |  Dataset\Ratio    | 0.2(initial)| 0.4   | 0.6      | 0.8      | 1.0      |
 | :-------------:   | :---------: | :---: | :------: | :------: | :------: |
