@@ -75,8 +75,8 @@ The following baseline result is evaluated by F1-score
 | :-------------:   | :---------: | :---: | :------: | :------: | :------: |
 |   BiLSTM-CRF      |    71.35    | 88.29 |   72.4   |          |          |
 |synomous(m=3,r=0.3)|             | 93.37 |   71.4   |          |          |
-|  Bert-BiLSTM-CRF  |    78.38    |       |   74.44  |   91.86  |          |
-|     Bert-CRF      |    79.03    |       |   74.41  |   92.42  |          |
+|  Bert-BiLSTM-CRF  |    78.38    | 94.51 |   74.44  |   91.46  |   81.96  |
+|     Bert-CRF      |    79.03    | 95.59 |   74.41  |   91.82  |   82.29  |
 
 active_learn (each_query raito = 0.2) on BiLSTM-CRF
 
