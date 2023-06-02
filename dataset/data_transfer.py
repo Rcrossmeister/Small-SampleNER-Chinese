@@ -67,6 +67,9 @@ def bio2json(bio_data):
     return json.dumps({"text": text, "label": labels}, ensure_ascii=False)
 
 def read_bio_save_json(src_path):
+    """
+    read XXX.txt to save XXX.json and label2id.json {"label":id} | e.g. {"O": 0, "B-LOC": 1, "B-ORG": 2, "B-PER": 3, "I-LOC": 4, "I-ORG": 5, "I-PER": 6, "<START>": 7, "<STOP>": 8}
+    """
     json_buffer = []
     temp_buffer = []
     label2id = {}
