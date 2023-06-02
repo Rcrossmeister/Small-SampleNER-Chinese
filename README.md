@@ -5,16 +5,17 @@ A BiLSTM-CRF model is used to complete Chinese NER tasks. It is an improvement o
 
 _Note : This repo is built for code support of our paper, the more available methods is developing in process._
 
-_Note : A baseline result of CCKS2017, 2018, 2019, Weibo, etc. is planned to upload later soon._
-
 *Note : An data interface for CCKS is still empty, will be available soon* 
 
-*Note : The detail version of dataset description and README will be updated soon* 
+*Note : The detail version of dataset description and README will be updated soon*
+
+*Note: The README Still need a further revise and implements.* 
 
 __Update:__
 
 * _The transfer document for BIO to json is available now. 05-13-2023_
-* *The raw version of Bert-BiLSTM-CRF is available, will fix it later*
+* *The raw version of Bert-BiLSTM-CRF is available, will fix it later. 05-22-2023*
+* *The Bert-BiLSTM-CRF model is available for our NER task.* 06-03-2023
 
 ## DataSet
 
