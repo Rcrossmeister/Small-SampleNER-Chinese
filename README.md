@@ -11,12 +11,14 @@ _Note : This repo is built for code support of our paper, the more available met
 
 *Note: The README Still need a further revise and implements.* 
 
+*Note: Because of the accuracy of the CCKS, data preprocess technique is required as well.*
+
 __Update:__
 
 * _The transfer document for BIO to json is available now. 05-13-2023_
 * *The raw version of Bert-BiLSTM-CRF is available, will fix it later. 05-22-2023*
-* *The Bert-BiLSTM-CRF model is available for our NER task.* 06-03-2023
-* A P
+* *The Bert-BiLSTM-CRF model is available for our NER task.* 06-01-2023
+* *A Preprocess tools for labeled data is updated. 06-03-2023*
 
 ## DataSet
 
