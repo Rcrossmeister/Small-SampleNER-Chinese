@@ -11,7 +11,7 @@ def bio2json(bio_data):
     end = -1
 
     for i in range(len(bio_data)):
-        word, label = bio_data[i].split()
+        word, label = bio_data[i][0],bio_data[i][2:]
         if label.startswith('B-'):
             if start != -1:
                 if entity_type not in entities:
@@ -67,20 +67,18 @@ def bio2json(bio_data):
     return json.dumps({"text": text, "label": labels}, ensure_ascii=False)
 
 def read_bio_save_json(src_path):
-    """
-    read XXX.txt to save XXX.json and label2id.json {"label":id} | e.g. {"O": 0, "B-LOC": 1, "B-ORG": 2, "B-PER": 3, "I-LOC": 4, "I-ORG": 5, "I-PER": 6, "<START>": 7, "<STOP>": 8}
-    """
     json_buffer = []
     temp_buffer = []
     label2id = {}
     label2id_buffer =set()
     
     with open(src_path,'r',encoding='utf-8') as f:
-        for item in f.readlines():
+        for (idx,item) in enumerate(f.readlines()):
             item = item.strip()
             if item!="":
                 temp_buffer.append(item)
-                label2id_buffer.add(item.split()[1])
+                print(idx,item)
+                label2id_buffer.add(item[2:])
             else:
                 json_buffer.append(bio2json(temp_buffer))
                 temp_buffer=[]
