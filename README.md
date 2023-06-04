@@ -38,8 +38,6 @@ CFSC-NER dataset provides 10667 Chinese financial news sentences with a total of
 
 CCKS2017 is a dataset for Chinese clinical named entity recognition (NER), which is a fundamental and critical task for other natural language processing (NLP) tasks. The dataset consists of 1198 records for training and 398 records for testing
 
-**--need interface**
-
 4. [__CCKS2018__](https://github.com/Rcrossmeister/Small-SampleNER-Chinese/tree/main/dataset/ccks2018)
 
 CCKS2018 is a named entity recognition (NER) task focusing on Chinese electronic medical records (EMR). The dataset provided by CCKS2018 medical NER academic competition consists of 600 entries of real-world CEMRs as training dataset
@@ -59,7 +57,7 @@ python run_BiLSTM-CRF.py \
 		--embedding_size 128 \ 
 ```
 
- ___If you want to train your own data, strictly follow the format of CLUENER2020 dataset above and change the `--data_dir` to adapt yours ,more quick transfer data interface will be available soon!___
+ ___If you want to train your own data, strictly follow the format of CLUENER2020 dataset above and change the `--data_dir` to adapt yours ,more quick transfer data interface is available for raw using, check it [here](https://github.com/Rcrossmeister/Small-SampleNER-Chinese/blob/main/data_processor.py)!___
 
 * Using the trained model to **predict**
 
