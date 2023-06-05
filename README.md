@@ -5,10 +5,6 @@ A BiLSTM-CRF model is used to complete Chinese NER tasks. It is an improvement o
 
 _Note : This repo is built for code support of our paper, the more available methods is developing in process._
 
-*Note : An data interface for CCKS is still empty, will be available soon* 
-
-*Note : The detail version of dataset description and README will be updated soon*
-
 *Note: The README Still need a further revise and implements.* 
 
 *Note: Because of the accuracy of the CCKS, data preprocess technique is required as well.*
