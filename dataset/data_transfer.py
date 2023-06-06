@@ -80,7 +80,7 @@ def read_bio_save_json(src_path):
             item = item.strip()
             if item!="":
                 temp_buffer.append(item)
-                print(idx,item)
+                #print(idx,item)
                 label2id_buffer.add(item[2:])
             else:
                 json_buffer.append(bio2json(temp_buffer))
