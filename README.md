@@ -20,7 +20,7 @@ __Update:__
 
 1. __[CLUENER2020](https://github.com/Rcrossmeister/Small-SampleNER-Chinese/tree/main/dataset/cluener)__
 
-CLUENER2020 is a well-defined fine-grained dataset for named entity recognition in Chinese. It contains **10 categories** and is more challenging than current other Chinese NER datasets and could better reflect real-world scenarios. The categories include person, organization, location, product, time, event, animal, plant, food and instrument.
+CLUENER2020 is a well-defined fine-grained dataset for named entity recognition in Chinese. It contains **10 categories**, is more challenging than other Chinese NER datasets, and could better reflect real-world scenarios. The categories include person, organization, location, product, time, event, animal, plant, food, and instrument.
 
 2. [__MSRA-NER__](https://github.com/Rcrossmeister/Small-SampleNER-Chinese/tree/main/dataset/msra)
 
