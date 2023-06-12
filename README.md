@@ -102,12 +102,11 @@ active_learn (each_query raito = 0.2) on BiLSTM-CRF
 
 Please cite our paper if you use it in your work:
 
-```
+```shell
 @inproceedings{,
    title={{}: },
    author={},
    booktitle={},
-   year={2023}
+   year={}
 }
 ```
-
