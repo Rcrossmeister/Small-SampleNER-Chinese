@@ -38,8 +38,6 @@ CCKS2017 is a dataset for Chinese clinical named entity recognition (NER), which
 
 CCKS2018 is a named entity recognition (NER) task focusing on Chinese electronic medical records (EMR). The dataset provided by CCKS2018 medical NER academic competition consists of 600 entries of real-world CEMRs as training dataset
 
-**--need interface**
-
 ## Use
 
 * To **train** the BiLSTM-CRF baseline model with **CLUENER2020** dataset :
