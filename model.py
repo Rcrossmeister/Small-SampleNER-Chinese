@@ -1,11 +1,14 @@
-import torch
-from torch.nn import LayerNorm
-import torch.nn as nn
-from crf import CRF
-from transformers import BertModel
-from typing import Optional, Tuple, List
 import logging
+from typing import Optional, Tuple, List
+
+import torch
+import torch.nn as nn
+from torch.nn import LayerNorm
 from torchcrf import CRF as torchCRF
+from transformers import BertModel
+
+from crf import CRF
+
 
 class SpatialDropout(nn.Dropout2d):
     def __init__(self, p=0.6):
