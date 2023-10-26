@@ -1,3 +1,4 @@
 model/cache
 model/**/*.pyc
 .idea/
+.DS_Store
