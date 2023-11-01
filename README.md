@@ -96,6 +96,11 @@ active_learn (each_query raito = 0.2) on BiLSTM-CRF
 |     CCKS2018(lc)  |    61.79    | 68.33 |  72.26   |   74.87  |  75.45   |
 |     CCKS2018(loss)|    64.20    | 68.19 |  72.70   |   74.17  |  76.10   |
 
+active_learn (each_query raito = 0.2) on Bert-BiLSTM-CRF
+
+|  Dataset\Ratio    | 0.2(initial)| 0.4   | 0.6      | 0.8      | 1.0      |
+| :-------------:   | :---------: | :---: | :------: | :------: | :------: |
+|   CFSC-NER(lc)    |    77.78    | 79.39 |  79.76   |   81.43  |  81.50   |
 ## Citation
 
 Please cite our paper if you use it in your work:
